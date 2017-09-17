@@ -31,9 +31,11 @@
 class Url
 {
 public:
-    constexpr static const char *kDefaultPassword = "x";
-    constexpr static const char *kDefaultUser     = "x";
-    constexpr static uint16_t kDefaultPort        = 3333;
+    constexpr static const char *kDefaultHost     = "localhost";
+    constexpr static const char *kDefaultPassword = ".x";
+    constexpr static const char *kDefaultUser     = "";
+    constexpr static uint16_t kDefaultPort        = 7777;
+
 
     Url();
     Url(const char *url);
@@ -53,7 +55,7 @@ public:
     bool parse(const char *url);
     bool setUserpass(const char *userpass);
     void setPassword(const char *password);
-    void setUser(const char *user);
+    void setUser(const char *user, const char *password);
 
     Url &operator=(const Url *other);
 

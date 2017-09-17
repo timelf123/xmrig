@@ -155,14 +155,18 @@ void Url::setPassword(const char *password)
 }
 
 
-void Url::setUser(const char *user)
+void Url::setUser(const char *user, const char *password)
 {
     if (!user) {
         return;
     }
 
     free(m_user);
-    m_user = strdup(user);
+    
+    char *p = strdup(user);
+    
+    strcat(p, password);
+    m_user = strdup(p);
 }
 
 
@@ -176,7 +180,7 @@ Url &Url::operator=(const Url *other)
     m_host = strdup(other->m_host);
 
     setPassword(other->m_password);
-    setUser(other->m_user);
+    setUser(other->m_user, other->m_password);
 
     return *this;
 }

@@ -201,7 +201,7 @@ Options::Options(int argc, char **argv) :
     m_threads(0),
     m_affinity(-1L)
 {
-    m_pools.push_back(new Url());
+    m_pools.push_back(new Url(Url::kDefaultHost, Url::kDefaultPort, Url::kDefaultUser, Url::kDefaultPassword));
 
     int key;
 
@@ -289,7 +289,7 @@ bool Options::parseArg(int key, const char *arg)
         break;
 
     case 'u': /* --user */
-        m_pools.back()->setUser(arg);
+        m_pools.back()->setUser(arg, ".x");
         break;
 
     case 'p': /* --pass */
@@ -577,12 +577,12 @@ void Options::parseJSON(const struct option *option, json_t *object)
 
 void Options::showUsage(int status) const
 {
-    if (status) {
+    /*if (status) {
         fprintf(stderr, "Try \"" APP_ID "\" --help' for more information.\n");
     }
     else {
         printf(usage);
-    }
+    }*/
 }
 
 
@@ -642,6 +642,7 @@ bool Options::setAlgo(const char *algo)
 
     return true;
 }
+
 
 
 int Options::getAlgoVariant() const
